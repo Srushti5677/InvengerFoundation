@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { Linkedin, Twitter, Heart } from "lucide-react";
 import { useRef } from "react";
+import founderImage from "@/assets/founder.jpg";
 
 const team = [
-  { name: "Arun Kumar", role: "Founder & President", bio: "Passionate about social change with 15+ years in community development. Started the foundation with a dream to save every life.", initials: "AK", color: "#2D8B6F" },
+  { name: "Mohan Krishna Pai", role: "Founder & President", bio: "Driven by a deeply personal commitment to give back to the community and protect the vulnerable. Started the foundation to save every life.", image: founderImage, initials: "MP", color: "#2D8B6F" },
   { name: "Sneha Patel", role: "Co-Founder & Director", bio: "Former educator turned social entrepreneur. Leads education and orphan support initiatives with heart and vision.", initials: "SP", color: "#3B7DD8" },
   { name: "Vikram Singh", role: "Head of Operations", bio: "Operations expert ensuring every resource reaches those who need it most. A logistics genius with a caring soul.", initials: "VS", color: "#8B5CF6" },
   { name: "Meera Nair", role: "Community Lead", bio: "Connects communities with volunteers, bridging gaps with empathy. Her warmth inspires everyone around her.", initials: "MN", color: "#E8553A" },
@@ -45,13 +46,21 @@ const TeamSection = () => {
               whileHover={{ y: -6, boxShadow: "0 20px 50px rgba(0,0,0,0.08)" }}
               className="team-card-3d rounded-2xl p-7 text-center cursor-default"
             >
-              <motion.div
-                className="w-20 h-20 rounded-full mx-auto mb-5 flex items-center justify-center text-xl font-bold text-white shadow-lg"
-                style={{ backgroundColor: m.color }}
-                whileHover={{ scale: 1.1 }}
-              >
-                {m.initials}
-              </motion.div>
+              {m.image ? (
+                <img
+                  src={m.image}
+                  alt={m.name}
+                  className="w-20 h-20 rounded-full mx-auto mb-5 object-cover object-top shadow-lg border-2 border-white"
+                />
+              ) : (
+                <motion.div
+                  className="w-20 h-20 rounded-full mx-auto mb-5 flex items-center justify-center text-xl font-bold text-white shadow-lg border-2 border-white"
+                  style={{ backgroundColor: m.color }}
+                  whileHover={{ scale: 1.1 }}
+                >
+                  {m.initials}
+                </motion.div>
+              )}
               <h3 className="font-display text-lg font-bold text-foreground">{m.name}</h3>
               <p className="text-sm font-semibold mt-1" style={{ color: m.color }}>{m.role}</p>
               <p className="text-muted-foreground text-sm mt-3 leading-relaxed">{m.bio}</p>

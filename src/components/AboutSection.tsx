@@ -100,7 +100,7 @@ const AboutSection = () => {
 
             {/* Image with parallax */}
             <motion.div
-              className="relative rounded-2xl overflow-hidden group"
+              className="relative rounded-2xl overflow-hidden group mt-8"
               style={{ y: imageY }}
             >
               <img
