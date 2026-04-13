@@ -84,7 +84,7 @@ const Index = () => (
     <SectionDivider variant="wave" color="#f5f3ff" />
 
     <GallerySection />
-    {/* <ImpactMapSection /> */}
+    <ImpactMapSection />
     <TestimonialsSection />
     <TeamSection />
 

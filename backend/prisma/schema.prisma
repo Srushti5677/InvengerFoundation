@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
+  password  String
+  name      String
+  role      Role       @default(USER)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  donations Donation[]
+}
+
+model Campaign {
+  id           Int        @id @default(autoincrement())
+  title        String
+  description  String
+  goalAmount   Float
+  raisedAmount Float      @default(0)
+  imageUrl     String
+  videoUrl     String?
+  isActive     Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  donations    Donation[]
+}
+
+model Donation {
+  id         Int      @id @default(autoincrement())
+  amount     Float
+  message    String?
+  createdAt  DateTime @default(now())
+  userId     Int?
+  campaignId Int
+  user       User?    @relation(fields: [userId], references: [id])
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
+}
+
+model GalleryItem {
+  id          Int      @id @default(autoincrement())
+  title       String
+  imageUrl    String
+  category    String   @default("events")
+  date        String?
+  location    String?
+  impact      String?
+  description String?  @db.Text
+  lat         Float?
+  lng         Float?
+  createdAt   DateTime @default(now())
+}
+
+model SuccessStory {
+  id          Int      @id @default(autoincrement())
+  title       String
+  subtitle    String
+  imageUrl    String
+  beforeText  String   @db.Text
+  afterText   String   @db.Text
+  quote       String   @db.Text
+  quotePerson String
+  color       String   @default("#D4A017")
+  isMilestone Boolean  @default(false)
+  year        Int?
+  createdAt   DateTime @default(now())
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  summary     String?  @db.Text
+  mainImage   String
+  content     Json?    // Array of blocks: {type: 'text'|'image'|'video', value: string}
+  impact      String?
+  location    String?
+  category    String?
+  isFeatured  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
