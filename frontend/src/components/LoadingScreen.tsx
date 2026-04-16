@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 const LoadingScreen = () => {
   const [visible, setVisible] = useState(true);
@@ -61,13 +61,13 @@ const LoadingScreen = () => {
             />
           ))}
 
-          {/* Heartbeat icon */}
+          {/* Animated icon */}
           <motion.div
             animate={{ scale: [1, 1.25, 1, 1.2, 1] }}
             transition={{ duration: 1.5, repeat: Infinity }}
             className="mb-6"
           >
-            <Heart className="w-12 h-12 text-red-400" fill="currentColor" />
+            <Sparkles className="w-12 h-12 text-emerald-300" />
           </motion.div>
 
           {/* Text */}

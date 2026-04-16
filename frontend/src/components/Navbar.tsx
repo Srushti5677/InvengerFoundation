@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Heart } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import invengerLogo from "@/assets/invenger logo.jpg";
 
@@ -7,7 +7,6 @@ const navLinks = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Our Causes", href: "#causes" },
-  { label: "Campaigns", href: "#campaigns" },
   { label: "Impact", href: "#impact" },
   { label: "Gallery", href: "#gallery" },
   { label: "Volunteer", href: "#volunteer" },
@@ -101,7 +100,6 @@ const Navbar = () => {
             whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(232,85,58,0.4)" }}
             whileTap={{ scale: 0.97 }}
           >
-            <Heart className="w-4 h-4 text-white animate-heartbeat" />
             <span className="relative z-10 text-white">Donate Now</span>
           </motion.a>
         </div>
@@ -144,7 +142,6 @@ const Navbar = () => {
                 className="mt-2 px-6 py-3 text-sm font-semibold text-center rounded-xl text-white flex items-center justify-center gap-2"
                 style={{ background: "linear-gradient(135deg, #E8553A, #D4432E)" }}
               >
-                <Heart className="w-4 h-4" />
                 Donate Now
               </a>
             </div>

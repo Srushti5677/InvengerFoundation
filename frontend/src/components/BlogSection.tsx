@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Clock, ArrowUpRight, Newspaper } from "lucide-react";
+import { Clock, ArrowUpRight, Newspaper } from "lucide-react";
 import galleryEnvironment from "@/assets/gallery-environment.jpg";
 import galleryWomen from "@/assets/gallery-women.jpg";
 import galleryWater from "@/assets/gallery-water.jpg";
@@ -73,9 +73,6 @@ const BlogSection = () => (
               </div>
               <h3 className="font-display text-base font-bold text-foreground group-hover:text-primary transition-colors leading-snug">{p.title}</h3>
               <p className="text-muted-foreground text-sm mt-2 leading-relaxed line-clamp-2">{p.excerpt}</p>
-              <span className="inline-flex items-center gap-1 text-sm font-semibold mt-3 text-primary group-hover:gap-2 transition-all">
-                Read more <ArrowRight className="w-3.5 h-3.5" />
-              </span>
             </div>
           </motion.article>
         ))}

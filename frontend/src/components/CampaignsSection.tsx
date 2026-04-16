@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Heart, Target, TrendingUp, ImagePlus } from "lucide-react";
+import { Target, TrendingUp, ImagePlus } from "lucide-react";
+import { resolveMediaURL } from "@/utils/media";
 
 interface Campaign {
   id: number;
@@ -52,7 +53,7 @@ const CampaignsSection = () => {
   }, []);
 
   return (
-    <section id="campaigns" className="py-24 relative overflow-hidden bg-white">
+    <section id="campaigns" className="py-16 relative overflow-hidden bg-white">
       <div className="absolute inset-0 bg-gradient-to-b from-slate-50/50 to-white pointer-events-none" />
       
       <div className="relative container mx-auto px-4">
@@ -60,7 +61,7 @@ const CampaignsSection = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/5 text-primary text-xs font-bold tracking-wider uppercase border border-primary/10">
             <Target className="w-3.5 h-3.5" />
@@ -104,7 +105,7 @@ const CampaignsSection = () => {
                     <div className="relative h-60 overflow-hidden">
                       {campaign.imageUrl ? (
                         <img
-                          src={campaign.imageUrl}
+                          src={resolveMediaURL(campaign.imageUrl)}
                           alt={campaign.title}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />
@@ -154,10 +155,9 @@ const CampaignsSection = () => {
                       <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className="mt-8 w-full py-4 rounded-2xl font-bold text-sm text-white flex items-center justify-center gap-2 transition-all shadow-lg"
+                        className="mt-8 w-full py-4 rounded-2xl font-bold text-sm text-white flex items-center justify-center transition-all shadow-lg"
                         style={{ background: `linear-gradient(135deg, ${color}, ${color}dd)`, boxShadow: `0 8px 20px ${color}30` }}
                       >
-                        <Heart className="w-4 h-4 fill-white/20" />
                         Donate Now
                       </motion.button>
                     </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, BookOpen, Clock, MapPin } from "lucide-react";
+import { resolveMediaURL } from "@/utils/media";
 
 interface Project {
   id: number;
@@ -33,9 +34,9 @@ const ProjectsSection = () => {
   if (projects.length === 0) return null;
 
   return (
-    <section className="py-24 bg-slate-50 relative overflow-hidden">
+    <section className="py-16 bg-slate-50 relative overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
           <div className="max-w-2xl">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-[10px] font-black tracking-widest uppercase border border-blue-100">
               <BookOpen className="w-3.5 h-3.5" />
@@ -64,7 +65,7 @@ const ProjectsSection = () => {
               className="bg-white rounded-[48px] p-8 border border-white shadow-2xl shadow-slate-200/50 group flex flex-col h-full"
             >
               <div className="relative aspect-[16/10] rounded-[32px] overflow-hidden mb-8 shadow-xl">
-                 <img src={p.mainImage} alt={p.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                 <img src={resolveMediaURL(p.mainImage)} alt={p.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                  <div className="absolute top-6 left-6 flex gap-2">
                     <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-wider text-slate-900 shadow-lg">

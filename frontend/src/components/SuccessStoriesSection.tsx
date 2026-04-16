@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Heart, Sparkles, Quote, ImageOff } from "lucide-react";
+import { ChevronLeft, ChevronRight, Sparkles, Quote, ImageOff } from "lucide-react";
+import { resolveMediaURL } from "@/utils/media";
 
 interface Story {
   id: number;
@@ -40,7 +41,7 @@ const SuccessStoriesSection = () => {
   const story = stories[current];
 
   return (
-    <section className="py-24 relative overflow-hidden bg-white">
+    <section className="py-16 relative overflow-hidden bg-white">
       <div className="absolute inset-0 bg-gradient-to-b from-slate-50/50 via-white to-slate-50/50 pointer-events-none" />
 
       <div className="relative container mx-auto px-4">
@@ -48,7 +49,7 @@ const SuccessStoriesSection = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold tracking-wider uppercase border border-emerald-100">
             <Sparkles className="w-3.5 h-3.5" />
@@ -86,7 +87,7 @@ const SuccessStoriesSection = () => {
                 {/* Image */}
                 <div className="relative rounded-[32px] overflow-hidden group aspect-[4/3] lg:aspect-auto lg:h-[450px]">
                   <img
-                    src={story.imageUrl}
+                    src={resolveMediaURL(story.imageUrl)}
                     alt={story.title}
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                   />

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, X, Phone, PawPrint, Send, CheckCircle } from "lucide-react";
+import { X, Phone, PawPrint, Send, CheckCircle } from "lucide-react";
 
 const FloatingActionButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +36,7 @@ const FloatingActionButton = () => {
                 whileHover={{ scale: 1.05, x: -5 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Heart className="w-4 h-4" /> Donate Now
+                Donate Now
               </motion.a>
 
               <motion.button
@@ -75,7 +75,7 @@ const FloatingActionButton = () => {
           animate={!isOpen ? { boxShadow: ["0 0 0 0 rgba(232,85,58,0.4)", "0 0 0 14px rgba(232,85,58,0)", "0 0 0 0 rgba(232,85,58,0.4)"] } : {}}
           transition={!isOpen ? { duration: 2, repeat: Infinity } : {}}
         >
-          {isOpen ? <X className="w-6 h-6" /> : <Heart className="w-6 h-6" fill="currentColor" />}
+          {isOpen ? <X className="w-6 h-6" /> : <Send className="w-6 h-6" />}
         </motion.button>
       </div>
 

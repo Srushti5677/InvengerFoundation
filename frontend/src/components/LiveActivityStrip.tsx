@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { PawPrint, TreePine, Utensils, Heart, Users, Droplets, Baby } from "lucide-react";
+import { PawPrint, TreePine, Utensils, Users, Droplets, Baby } from "lucide-react";
 
 const activities = [
   { icon: PawPrint, text: "2 stray dogs rescued in Bangalore", time: "5 min ago", color: "#E8553A" },
   { icon: Utensils, text: "50 hot meals served at Whitefield shelter", time: "12 min ago", color: "#D4932A" },
   { icon: TreePine, text: "20 saplings planted in Mysore district", time: "30 min ago", color: "#2D8B6F" },
-  { icon: Heart, text: "₹5,000 donated by an anonymous donor", time: "45 min ago", color: "#E8553A" },
+  { icon: Users, text: "₹5,000 donated by an anonymous donor", time: "45 min ago", color: "#E8553A" },
   { icon: Baby, text: "School supplies delivered to 15 children", time: "1 hr ago", color: "#3B7DD8" },
   { icon: Users, text: "3 new volunteers joined from Mumbai", time: "2 hr ago", color: "#8B5CF6" },
   { icon: Droplets, text: "Water purifier installed in Rajasthan village", time: "3 hr ago", color: "#06B6D4" },

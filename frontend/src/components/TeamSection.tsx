@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { Linkedin, Twitter, Heart } from "lucide-react";
-import { useRef } from "react";
+import { Linkedin, Twitter } from "lucide-react";
 import founderImage from "@/assets/founder.jpg";
 
 const team = [
@@ -22,10 +21,7 @@ const TeamSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="section-badge">
-            <Heart className="w-4 h-4" />
-            Our Team
-          </span>
+          <span className="section-badge">Our Team</span>
           <h2 className="section-title mt-5">
             Hearts Behind{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-blue-500">

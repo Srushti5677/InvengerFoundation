@@ -1,212 +1,173 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, MapPin, CalendarDays, Users, Sparkles, Camera, Heart, ImageOff } from "lucide-react";
+import { X, Maximize2, Camera, MapPin } from "lucide-react";
 
-interface GalleryEvent {
-  id: number;
-  title: string;
-  description?: string;
-  imageUrl: string;
-  date?: string;
-  location?: string;
-  impact?: string;
-  category: string;
-}
+// Assets
+import galleryEducation from "@/assets/gallery-education.jpg";
+import galleryEnvironment from "@/assets/gallery-environment.jpg";
+import galleryHealth from "@/assets/gallery-health.jpg";
+import galleryOrphanage from "@/assets/gallery-orphanage.jpg";
+import galleryRelief from "@/assets/gallery-relief.jpg";
+import galleryWater from "@/assets/gallery-water.jpg";
+import galleryWomen from "@/assets/gallery-women.jpg";
+import indiaAnimal from "@/assets/india-animal-welfare.png";
+import indiaEnvironment from "@/assets/india-environment.png";
+import indiaFood from "@/assets/india-food-aid.png";
+import indiaOrphan from "@/assets/india-orphan-support.png";
 
-const categories = [
-  { key: "all", label: "All" },
-  { key: "events", label: "Events" },
-  { key: "rescues", label: "Rescues" },
-  { key: "plantations", label: "Plantations" },
-  { key: "drives", label: "Drives" },
+const images = [
+  { src: galleryEducation, title: "Rural Education", category: "Education", location: "Karnataka", size: "large" },
+  { src: indiaFood, title: "Community Kitchen", category: "Relief", location: "Maharashtra", size: "medium" },
+  { src: galleryEnvironment, title: "Afefforestation Drive", category: "Environment", location: "Tamil Nadu", size: "medium" },
+  { src: indiaAnimal, title: "Stray Rescue", category: "Animal Welfare", location: "Goa", size: "large" },
+  { src: galleryHealth, title: "Medical Camp", category: "Healthcare", location: "Gujarat", size: "medium" },
+  { src: indiaOrphan, title: "Orphanage Support", category: "Social Welfare", location: "Delhi", size: "medium" },
+  { src: galleryWater, title: "Clean Water Initiative", category: "Relief", location: "Rajasthan", size: "large" },
+  { src: galleryWomen, title: "Women Empowerment", category: "Development", location: "Uttar Pradesh", size: "medium" },
+  { src: galleryRelief, title: "Disaster Relief", category: "Emergency", location: "Assam", size: "medium" },
+  { src: indiaEnvironment, title: "Eco Protection", category: "Environment", location: "Kerala", size: "medium" },
+  { src: galleryOrphanage, title: "Evening Classes", category: "Education", location: "Bihar", size: "medium" },
 ];
 
 const GallerySection = () => {
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [selectedEvent, setSelectedEvent] = useState<GalleryEvent | null>(null);
-  const [items, setItems] = useState<GalleryEvent[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [selectedImage, setSelectedImage] = useState<typeof images[0] | null>(null);
+  const [filter, setFilter] = useState("All");
 
-  useEffect(() => {
-    const fetchGallery = async () => {
-      try {
-        const res = await fetch("http://localhost:5000/api/gallery");
-        const data = await res.json();
-        if (Array.isArray(data)) setItems(data);
-      } catch (err) {
-        console.error("Gallery load fail", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchGallery();
-  }, []);
-
-  const filteredItems = activeCategory === "all" ? items : items.filter((e) => e.category === activeCategory);
+  const categories = ["All", ...new Set(images.map(img => img.category))];
+  const filteredImages = filter === "All" ? images : images.filter(img => img.category === filter);
 
   return (
-    <section id="gallery" className="py-24 relative overflow-hidden bg-slate-50/50">
-      <div className="absolute inset-0 bg-gradient-to-b from-white to-slate-50 pointer-events-none" />
+    <section id="gallery" className="py-24 bg-slate-50 relative overflow-hidden">
+      {/* Decorative Elements */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+      <div className="absolute top-40 -left-64 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-40 -right-64 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
 
-      <div className="relative container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold tracking-wider uppercase border border-emerald-100">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-widest mb-6"
+          >
             <Camera className="w-3.5 h-3.5" />
-            Gallery
-          </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mt-6 tracking-tight">
-            Compassion <span className="text-emerald-600 italic">in Action</span>
+            Visual Journey
+          </motion.div>
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6 tracking-tight">
+            Moments of <span className="text-emerald-600 italic">Change</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-slate-500 mt-6 text-lg leading-relaxed">
-            Moments that matter — captured from the field, the shelters, and the communities we serve.
+          <p className="text-slate-500 text-lg leading-relaxed">
+            A glimpse into the lives we touch and the transformation we build together across India.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Category filters */}
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
+        {/* Filters */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
           {categories.map((cat) => (
-            <motion.button
-              key={cat.key}
-              onClick={() => setActiveCategory(cat.key)}
-              className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 ${
-                cat.key === activeCategory
-                  ? "text-white shadow-lg"
-                  : "text-slate-500 bg-white border border-slate-200 hover:border-emerald-200"
+            <button
+              key={cat}
+              onClick={() => setFilter(cat)}
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+                filter === cat
+                  ? "bg-slate-900 text-white shadow-lg"
+                  : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
               }`}
-              style={cat.key === activeCategory ? { background: "linear-gradient(135deg, #059669, #10B981)" } : undefined}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
             >
-              {cat.label}
-            </motion.button>
+              {cat}
+            </button>
           ))}
         </div>
 
-        {loading ? (
-          <div className="flex justify-center py-20">
-            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-emerald-600"></div>
-          </div>
-        ) : (
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeCategory}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-            >
-              {filteredItems.length === 0 ? (
-                <div className="col-span-full py-20 text-center bg-white rounded-3xl border border-slate-100 italic text-slate-400">
-                  <ImageOff className="w-10 h-10 mx-auto mb-4 opacity-20" />
-                  No photos in this category yet.
-                </div>
-              ) : (
-                filteredItems.map((e, i) => (
-                  <motion.div
-                    key={e.id}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: i * 0.05 }}
-                    onClick={() => setSelectedEvent(e)}
-                    className="group bg-white rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100"
-                  >
-                    <div className="relative overflow-hidden h-56">
-                      <img
-                        src={e.imageUrl}
-                        alt={e.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
-                        <span className="text-white text-xs font-bold tracking-widest uppercase">View Details →</span>
-                      </div>
-                      <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-bold text-white backdrop-blur-md bg-black/20 border border-white/20 uppercase tracking-widest">
-                        {e.category}
-                      </div>
-                    </div>
-                    <div className="p-5">
-                      <h3 className="text-base font-bold text-slate-900 line-clamp-1 group-hover:text-emerald-700 transition-colors uppercase tracking-tight">{e.title}</h3>
-                      <div className="flex items-center gap-2 mt-3 no-underline">
-                        <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
-                        <span className="text-xs font-bold text-emerald-600 tracking-wide uppercase">{e.impact || "Community Impact"}</span>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))
-              )}
-            </motion.div>
-          </AnimatePresence>
-        )}
-
-        {/* Modal */}
-        <AnimatePresence>
-          {selectedEvent && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-md"
-              onClick={() => setSelectedEvent(null)}
-            >
+        {/* Gallery Grid */}
+        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+          <AnimatePresence mode="popLayout">
+            {filteredImages.map((img, idx) => (
               <motion.div
-                initial={{ scale: 0.9, y: 20 }}
-                animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.9, y: 20 }}
-                onClick={(e) => e.stopPropagation()}
-                className="bg-white rounded-[32px] max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl border border-white/20"
+                key={img.src}
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                className="relative group cursor-pointer break-inside-avoid rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 bg-white border border-slate-100"
+                onClick={() => setSelectedImage(img)}
               >
-                <div className="relative h-80">
-                  <img src={selectedEvent.imageUrl} alt={selectedEvent.title} className="w-full h-full object-cover" />
-                  <button
-                    onClick={() => setSelectedEvent(null)}
-                    className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all text-white"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-                <div className="p-8">
-                  <div className="flex flex-wrap gap-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
-                    <span className="flex items-center gap-2"><CalendarDays className="w-3.5 h-3.5" /> {selectedEvent.date || "Recent Mission"}</span>
-                    <span className="flex items-center gap-2"><MapPin className="w-3.5 h-3.5" /> {selectedEvent.location || "On-field"}</span>
-                  </div>
-                  <h3 className="text-3xl font-bold text-slate-900 mt-4 tracking-tight">{selectedEvent.title}</h3>
-                  <p className="mt-6 text-slate-500 leading-relaxed text-sm">{selectedEvent.description || "A milestone in our journey of compassion. Every photo tells a story of change, hope, and the incredible legacy of the Invenger Foundation community."}</p>
-
-                  <div className="mt-8 grid grid-cols-2 gap-4">
-                    <div className="p-5 rounded-2xl bg-emerald-50/50 border border-emerald-100">
-                      <h4 className="text-[10px] font-black text-emerald-600 uppercase tracking-widest flex items-center gap-2.5">
-                        <Users className="w-3.5 h-3.5" /> Impact Created
-                      </h4>
-                      <p className="text-slate-900 font-bold mt-2 text-sm">{selectedEvent.impact || "Community Growth"}</p>
+                <div className="relative">
+                  <img
+                    src={img.src}
+                    alt={img.title}
+                    className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
+                    <div className="flex items-center gap-2 text-emerald-400 mb-2">
+                      <MapPin className="w-3.5 h-3.5" />
+                      <span className="text-[10px] font-bold uppercase tracking-widest">{img.location}</span>
                     </div>
-                    <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100">
-                      <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2.5">
-                        <Camera className="w-3.5 h-3.5" /> Mission
-                      </h4>
-                      <p className="text-slate-900 font-bold mt-2 text-sm uppercase tracking-tight">{selectedEvent.category}</p>
+                    <h3 className="text-white font-bold text-lg leading-tight">{img.title}</h3>
+                    <div className="mt-4 flex items-center justify-between">
+                      <span className="text-white/60 text-xs font-medium">{img.category}</span>
+                      <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/20">
+                        <Maximize2 className="w-4 h-4" />
+                      </div>
                     </div>
                   </div>
-
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => setSelectedEvent(null)}
-                    className="mt-8 w-full py-4 rounded-2xl font-bold text-sm text-white flex items-center justify-center gap-2 shadow-xl"
-                    style={{ background: "linear-gradient(135deg, #059669, #10B981)", boxShadow: "0 8px 25px rgba(5,150,105,0.3)" }}
-                  >
-                    <Heart className="w-4 h-4" /> Supporting Our Work
-                  </motion.button>
                 </div>
               </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            ))}
+          </AnimatePresence>
+        </div>
       </div>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={() => setSelectedImage(null)}
+          >
+            <motion.button
+              whileHover={{ rotate: 90 }}
+              className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all"
+            >
+              <X className="w-6 h-6" />
+            </motion.button>
+            
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative max-w-6xl w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={selectedImage.src}
+                alt={selectedImage.title}
+                className="w-full h-auto rounded-3xl shadow-2xl overflow-hidden shadow-emerald-500/10"
+              />
+              <div className="absolute bottom-6 left-6 right-6 lg:bottom-10 lg:left-10 lg:right-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6 pointer-events-none">
+                <div>
+                  <div className="flex items-center gap-3 text-emerald-400 mb-2">
+                    <MapPin className="w-4 h-4" />
+                    <span className="text-xs font-bold uppercase tracking-widest">{selectedImage.location}</span>
+                  </div>
+                  <h3 className="text-3xl lg:text-4xl font-display font-bold text-white tracking-tight">{selectedImage.title}</h3>
+                </div>
+                <div className="flex flex-col items-start lg:items-end">
+                  <span className="px-4 py-1.5 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold tracking-widest uppercase border border-emerald-500/30">
+                    {selectedImage.category}
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

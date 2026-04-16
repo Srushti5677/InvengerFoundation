@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Heart, PawPrint, TreePine, Baby, Utensils, Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
+import { ArrowUpRight, PawPrint, TreePine, Baby, Utensils, Facebook, Instagram, Twitter, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react";
 import invengerLogo from "@/assets/invenger logo.jpg";
 
 const socialLinks = [
@@ -16,41 +16,8 @@ const Footer = () => (
     <div className="h-px w-full bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent" />
 
     {/* Emotional CTA banner */}
-    <div className="container mx-auto px-4 pt-16 pb-12">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-16 max-w-2xl mx-auto"
-      >
-        <Heart className="w-8 h-8 text-red-400 mx-auto mb-4 animate-heartbeat" />
-        <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-4">
-          Every Act of Kindness Matters
-        </h3>
-        <p className="text-white/50 text-sm leading-relaxed mb-6">
-          Whether you donate, volunteer, or simply share our story — you become part of a community
-          that believes in a better world. Thank you for caring.
-        </p>
-        <div className="flex flex-wrap justify-center gap-3">
-          <motion.a
-            href="#donate"
-            className="px-6 py-2.5 rounded-full text-sm font-semibold text-white"
-            style={{ background: "linear-gradient(135deg, #E8553A, #D4432E)" }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Donate Now
-          </motion.a>
-          <motion.a
-            href="#volunteer"
-            className="px-6 py-2.5 rounded-full text-sm font-semibold text-white border border-white/20 hover:bg-white/5"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Join as Volunteer
-          </motion.a>
-        </div>
-      </motion.div>
+    {/* Main footer content */}
+    <div className="container mx-auto px-4 pt-12 pb-10">
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
         <div>
@@ -101,9 +68,9 @@ const Footer = () => (
           </div>
         </div>
         <div>
-          <h4 className="font-display font-bold text-white mb-5">Get Involved</h4>
+          <h4 className="font-display font-bold text-white mb-5">Quick Links</h4>
           <div className="space-y-3">
-            {["Donate", "Volunteer", "Sponsor a Life", "Campaigns", "Contact"].map((l) => (
+            {["Donate", "Volunteer", "Sponsor a Life", "Gallery"].map((l) => (
               <a
                 key={l}
                 href={`#${l.toLowerCase().replace(/\s/g, "")}`}
@@ -116,22 +83,20 @@ const Footer = () => (
           </div>
         </div>
         <div>
-          <h4 className="font-display font-bold text-white mb-5">Stay Updated</h4>
-          <p className="text-white/40 text-sm mb-4">Subscribe for impact stories and updates.</p>
-          <div className="flex gap-2">
-            <input
-              type="email"
-              placeholder="your@email.com"
-              className="flex-1 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-emerald-400/50 transition-colors"
-            />
-            <motion.button
-              className="px-4 py-2.5 rounded-xl text-sm font-semibold text-white"
-              style={{ background: "linear-gradient(135deg, #2D8B6F, #25765E)" }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Join
-            </motion.button>
+          <h4 className="font-display font-bold text-white mb-5">Contact Us</h4>
+          <div className="space-y-4">
+            <div className="flex items-start gap-3">
+              <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+              <p className="text-white/40 text-sm">Bangalore, Karnataka, India</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
+              <p className="text-white/40 text-sm">+91 98765 43210</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <Mail className="w-4 h-4 text-emerald-400 shrink-0" />
+              <p className="text-white/40 text-sm">info@invengerfoundation.org</p>
+            </div>
           </div>
         </div>
       </div>
@@ -140,9 +105,7 @@ const Footer = () => (
         <p className="text-sm text-white/30">
           © {new Date().getFullYear()} Invenger Foundation. All rights reserved.
         </p>
-        <p className="text-xs text-white/20 flex items-center gap-1">
-          Built with <Heart className="w-3 h-3 text-red-400" fill="currentColor" /> for a better world
-        </p>
+        <p className="text-xs text-white/20">Committed to building a better world</p>
       </div>
     </div>
   </footer>

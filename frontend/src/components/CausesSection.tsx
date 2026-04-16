@@ -1,47 +1,43 @@
 import { motion } from "framer-motion";
-import { PawPrint, Baby, TreePine, Utensils, ArrowRight, Heart } from "lucide-react";
-import campaignAnimals from "@/assets/campaign-animals.png";
-import galleryOrphanage from "@/assets/gallery-orphanage.jpg";
-import galleryEnvironment from "@/assets/gallery-environment.jpg";
-import campaignFood from "@/assets/campaign-food.png";
+import { PawPrint, Baby, TreePine, Utensils } from "lucide-react";
+import indiaAnimalWelfare from "@/assets/india-animal-welfare.png";
+import indiaOrphanSupport from "@/assets/india-orphan-support.png";
+import indiaEnvironment from "@/assets/india-environment.png";
+import indiaFoodAid from "@/assets/india-food-aid.png";
 
 const causes = [
   {
     icon: PawPrint,
     title: "Animal Welfare",
     description: "Rescuing, rehabilitating, and rehoming stray and injured animals. Every creature deserves love, safety, and a second chance at life.",
-    image: campaignAnimals,
+    image: indiaAnimalWelfare,
     color: "#E8553A",
-    stats: "2,800+ animals rescued",
   },
   {
     icon: Baby,
     title: "Orphan Support",
     description: "Providing education, nutrition, and emotional care to orphaned children. We become the family they never had.",
-    image: galleryOrphanage,
+    image: indiaOrphanSupport,
     color: "#3B7DD8",
-    stats: "1,200+ children supported",
   },
   {
     icon: TreePine,
     title: "Environmental Protection",
     description: "Planting trees, cleaning water bodies, and fighting climate change. Because the earth is the only home we all share.",
-    image: galleryEnvironment,
+    image: indiaEnvironment,
     color: "#2D8B6F",
-    stats: "15,000+ trees planted",
   },
   {
     icon: Utensils,
     title: "Food & Aid",
     description: "Serving hot meals to the hungry, distributing essentials during disasters, and ensuring no one sleeps on an empty stomach.",
-    image: campaignFood,
+    image: indiaFoodAid,
     color: "#D4932A",
-    stats: "50,000+ meals served",
   },
 ];
 
 const CausesSection = () => (
-  <section id="causes" className="py-24 relative overflow-hidden">
+  <section id="causes" className="py-16 relative overflow-hidden">
     <div className="absolute inset-0 bg-gradient-to-b from-emerald-50/30 via-background to-background" />
     <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-blue-400/5 blur-[100px]" />
 
@@ -50,12 +46,9 @@ const CausesSection = () => (
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-16"
+        className="text-center mb-10"
       >
-        <span className="section-badge">
-          <Heart className="w-4 h-4" />
-          What We Do
-        </span>
+        <span className="section-badge">What We Do</span>
         <h2 className="section-title mt-5">
           Every Life{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-blue-500">
@@ -99,21 +92,12 @@ const CausesSection = () => (
                 </div>
                 <span className="text-white font-semibold text-lg">{cause.title}</span>
               </div>
-              <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold text-white bg-white/15 backdrop-blur-md border border-white/20">
-                {cause.stats}
-              </div>
+
             </div>
 
             {/* Content */}
             <div className="p-6">
               <p className="text-muted-foreground leading-relaxed">{cause.description}</p>
-              <motion.div
-                className="mt-4 inline-flex items-center gap-2 text-sm font-semibold"
-                style={{ color: cause.color }}
-                whileHover={{ x: 5 }}
-              >
-                Learn more <ArrowRight className="w-4 h-4" />
-              </motion.div>
             </div>
           </motion.div>
         ))}
