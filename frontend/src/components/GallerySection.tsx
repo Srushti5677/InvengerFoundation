@@ -1,40 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Maximize2, Camera, MapPin } from "lucide-react";
-
-// Assets
-import galleryEducation from "@/assets/gallery-education.jpg";
-import galleryEnvironment from "@/assets/gallery-environment.jpg";
-import galleryHealth from "@/assets/gallery-health.jpg";
-import galleryOrphanage from "@/assets/gallery-orphanage.jpg";
-import galleryRelief from "@/assets/gallery-relief.jpg";
-import galleryWater from "@/assets/gallery-water.jpg";
-import galleryWomen from "@/assets/gallery-women.jpg";
-import indiaAnimal from "@/assets/india-animal-welfare.png";
-import indiaEnvironment from "@/assets/india-environment.png";
-import indiaFood from "@/assets/india-food-aid.png";
-import indiaOrphan from "@/assets/india-orphan-support.png";
-
-const images = [
-  { src: galleryEducation, title: "Rural Education", category: "Education", location: "Karnataka", size: "large" },
-  { src: indiaFood, title: "Community Kitchen", category: "Relief", location: "Maharashtra", size: "medium" },
-  { src: galleryEnvironment, title: "Afefforestation Drive", category: "Environment", location: "Tamil Nadu", size: "medium" },
-  { src: indiaAnimal, title: "Stray Rescue", category: "Animal Welfare", location: "Goa", size: "large" },
-  { src: galleryHealth, title: "Medical Camp", category: "Healthcare", location: "Gujarat", size: "medium" },
-  { src: indiaOrphan, title: "Orphanage Support", category: "Social Welfare", location: "Delhi", size: "medium" },
-  { src: galleryWater, title: "Clean Water Initiative", category: "Relief", location: "Rajasthan", size: "large" },
-  { src: galleryWomen, title: "Women Empowerment", category: "Development", location: "Uttar Pradesh", size: "medium" },
-  { src: galleryRelief, title: "Disaster Relief", category: "Emergency", location: "Assam", size: "medium" },
-  { src: indiaEnvironment, title: "Eco Protection", category: "Environment", location: "Kerala", size: "medium" },
-  { src: galleryOrphanage, title: "Evening Classes", category: "Education", location: "Bihar", size: "medium" },
-];
+import { resolveMediaURL } from "@/utils/media";
 
 const GallerySection = () => {
-  const [selectedImage, setSelectedImage] = useState<typeof images[0] | null>(null);
+  const [gallery, setGallery] = useState<any[]>([]);
+  const [selectedImage, setSelectedImage] = useState<any | null>(null);
   const [filter, setFilter] = useState("All");
+  const [loading, setLoading] = useState(true);
 
-  const categories = ["All", ...new Set(images.map(img => img.category))];
-  const filteredImages = filter === "All" ? images : images.filter(img => img.category === filter);
+  useEffect(() => {
+    const fetchGallery = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/gallery");
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          setGallery(data.map(item => ({
+            ...item,
+            src: resolveMediaURL(item.imageUrl)
+          })));
+        }
+      } catch (err) {
+        console.error("Gallery load fail", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchGallery();
+  }, []);
+
+  if (loading || gallery.length === 0) return null;
+
+  const categories = ["All", ...new Set(gallery.map(img => img.category))];
+  const filteredImages = filter === "All" ? gallery : gallery.filter(img => img.category === filter);
 
   return (
     <section id="gallery" className="py-24 bg-slate-50 relative overflow-hidden">

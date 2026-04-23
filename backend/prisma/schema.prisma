@@ -59,8 +59,8 @@ model GalleryItem {
   impact      String?
   description String?  @db.Text
   lat         Float?
-  lng         Float?
-  createdAt   DateTime @default(now())
+  mediaType    String   @default("image")
+  createdAt    DateTime @default(now())
 }
 
 model SuccessStory {
@@ -91,3 +91,13 @@ model Project {
   isFeatured  Boolean  @default(false)
   createdAt   DateTime @default(now())
 }
+
+model Volunteer {
+  id           Int      @id @default(autoincrement())
+  name         String
+  email        String
+  phone        String   @default("")
+  availability String
+  createdAt    DateTime @default(now())
+}
+

@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -7,6 +8,9 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+
+// Serve static files from the uploads directory
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 // Request logger
 app.use((req, res, next) => {
@@ -26,6 +30,8 @@ app.use('/api/upload', uploadRoutes);
 app.use('/api/gallery', galleryRoutes);
 app.use('/api/stories', require('./src/routes/storyRoutes'));
 app.use('/api/projects', require('./src/routes/projectRoutes'));
+app.use('/api/volunteers', require('./src/routes/volunteerRoutes'));
+
 
 // Health check
 app.get('/', (req, res) => {

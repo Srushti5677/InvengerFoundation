@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Users, CheckCircle, Send, MapPin, Phone, IndianRupee, ShieldCheck, BarChart3, Briefcase, Megaphone } from "lucide-react";
 
@@ -11,6 +11,18 @@ const transparency = [
 
 const ActionCenter = () => {
   const [activeTab, setActiveTab] = useState<"donate" | "volunteer">("donate");
+
+  // Switch tabs based on URL hash (for navbar links)
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash;
+      if (hash === "#donate") setActiveTab("donate");
+      if (hash === "#volunteer") setActiveTab("volunteer");
+    };
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
   
   // Donate States
   const [selectedAmount, setSelectedAmount] = useState<number | null>(500);
@@ -56,7 +68,8 @@ const ActionCenter = () => {
   ];
 
   return (
-    <section id="action-center" className="py-16 relative overflow-hidden bg-white">
+    <section id="volunteer" className="py-16 relative overflow-hidden bg-white">
+      <div id="donate" className="absolute top-0 left-0 w-0 h-0 invisible" />
       <div className="absolute inset-0 bg-gradient-to-b from-slate-50/50 via-white to-slate-50/50 pointer-events-none" />
       
       <div className="relative container mx-auto px-4">

@@ -1,149 +1,145 @@
-import { useState, useRef } from "react";
-import { motion } from "framer-motion";
-import { Play, Sparkles, Activity, ShieldCheck, Volume2, VolumeX } from "lucide-react";
-import workVideo from "@/assets/Videos/our-work.mp4";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles, Play, Award, Volume2, VolumeX, Phone } from "lucide-react";
+import ourWorkVideo from "@/assets/Videos/our-work.mp4";
 
 const VideoImpactSection = () => {
+  const [videos, setVideos] = useState<any[]>([
+    {
+      id: "our-work-local",
+      title: "Our Mission in Motion",
+      description: "Witness the direct results of our collective efforts. Every moment captures a journey of change made possible by your support.",
+      impact: "15,000+ Lives Touched",
+      videoUrl: ourWorkVideo,
+      thumbnailUrl: ourWorkVideo
+    }
+  ]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  };
+  const current = videos[activeIndex];
 
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden bg-white">
-      {/* Decorative background gradients from the original design */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none">
-        <motion.div 
-          animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/5 rounded-full blur-[120px]" 
-        />
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/5 rounded-full blur-[120px]" 
-        />
-      </div>
+    <section id="impact" className="py-20 my-8 relative overflow-hidden bg-slate-950 border-t border-white/5">
+      {/* Dynamic Background Glow */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-500/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/5 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
-          {/* Left Side: Text Content */}
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="flex-1 text-center lg:text-left max-w-xl"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold uppercase tracking-widest mb-6 border border-emerald-100">
-              <Activity className="w-3.5 h-3.5" />
-              Impact in Motion
-            </div>
-            
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-900 mb-6 tracking-tight leading-tight">
-              Seeing the <span className="text-emerald-600 italic">Smile</span> <br />
-              Behind Every Action
-            </h2>
-            
-            <p className="text-slate-500 text-lg leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0">
-              Our work is more than just statistics. It's about the lives we touch, the children we educate, and the communities we empower every single day. Listen to their stories.
-            </p>
-
-            <div className="grid sm:grid-cols-2 gap-8 text-left max-w-lg mx-auto lg:mx-0">
-              {[
-                { icon: Sparkles, title: "Real Impact", desc: "Verifiable change in lives across the country." },
-                { icon: ShieldCheck, title: "Pure Intention", desc: "Driven entirely by compassion and transparency." },
-              ].map((item, i) => (
-                <motion.div 
-                  key={i} 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.2 + 0.3 }}
-                  className="flex gap-4 group"
+          {/* Left Side: Content & Gallery */}
+          <div className="space-y-8">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/50 border border-slate-800 text-emerald-400 text-[10px] font-black uppercase tracking-widest">
+                <Sparkles className="w-3.5 h-3.5" />
+                Real Impact in Motion
+              </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center shrink-0 group-hover:bg-emerald-500 transition-colors duration-300 shadow-sm border border-emerald-100">
-                    <item.icon className="w-6 h-6 text-emerald-500 group-hover:text-white transition-colors duration-300" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-slate-900 text-sm mb-1">{item.title}</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+                  <h2 className="text-4xl md:text-5xl font-display font-black text-white leading-tight mb-4">
+                    {current.title}
+                  </h2>
+                  <p className="text-white/60 text-base leading-relaxed font-light mb-6 max-w-lg">
+                    {current.description || "Witness the direct results of our collective efforts. Every video captures a moment of change made possible by your support."}
+                  </p>
+                  
+                  {/* Highlight Stat */}
+                  <div className="inline-flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xl">
+                    <div className="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+                      <Award className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-[9px] font-black text-white/40 uppercase tracking-widest">Community Result</p>
+                      <p className="text-lg font-black text-white">{current.impact}</p>
+                    </div>
                   </div>
                 </motion.div>
-              ))}
+              </AnimatePresence>
             </div>
-          </motion.div>
 
-          {/* Right Side: Larger Premium Phone Video Frame  */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9, x: 30 }}
-            whileInView={{ opacity: 1, scale: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", duration: 1.5 }}
-            className="flex-shrink-0 relative"
-          >
-            {/* The Device Frame (Made larger as requested) */}
-            <div className="relative z-10 w-[320px] sm:w-[380px] md:w-[400px] aspect-[9/16] bg-slate-900 rounded-[3.5rem] p-3 shadow-2xl shadow-emerald-900/15 border border-slate-200 group">
-              
-              {/* Device Notch (Creates phone illusion) */}
-              <div className="absolute top-3 left-1/2 -translate-x-1/2 w-32 h-7 bg-slate-900 rounded-b-3xl z-30" />
-              
-              {/* Inner screen bezel */}
-              <div className="absolute inset-0 z-20 pointer-events-none border-[2px] border-white/5 rounded-[3.5rem]" />
-              
-              <div className="w-full h-full relative rounded-[2.8rem] overflow-hidden bg-black" onClick={toggleMute}>
-                <video 
-                  ref={videoRef}
-                  autoPlay 
-                  muted={isMuted}
-                  loop 
-                  playsInline
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                >
-                  <source src={workVideo} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+            {/* Interactive Video Gallery (Thumbnail List) */}
+            <div className="space-y-4">
+               <div className="flex items-center justify-between">
+                  <h4 className="text-white text-xs font-black uppercase tracking-widest">Video Archive</h4>
+                  <span className="text-white/30 text-[10px] uppercase font-bold">{activeIndex + 1} / {videos.length}</span>
+               </div>
+               <div className="flex gap-4 overflow-x-auto pb-4 -mx-2 px-2 scrollbar-none snap-x">
+                  {videos.map((vid, idx) => (
+                    <button
+                      key={vid.id}
+                      onClick={() => setActiveIndex(idx)}
+                      className={`relative flex-shrink-0 w-28 md:w-36 aspect-video rounded-xl overflow-hidden border-2 transition-all snap-start ${
+                        activeIndex === idx ? "border-emerald-500 scale-105 shadow-[0_0_20px_rgba(16,185,129,0.3)]" : "border-white/10 opacity-50 hover:opacity-100"
+                      }`}
+                    >
+                      <video src={vid.videoUrl} className="w-full h-full object-cover" muted playsInline />
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                         <Play className={`w-5 h-5 text-white ${activeIndex === idx ? "fill-white" : ""}`} />
+                      </div>
+                    </button>
+                  ))}
+               </div>
+            </div>
+          </div>
 
-                {/* Dark gradient for controls visibility */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-80 pointer-events-none" />
+          {/* Right Side: 3D Mobile Frame */}
+          <div className="flex justify-center perspective-[2000px]">
+            <motion.div
+              initial={{ rotateY: -8, rotateX: 2 }}
+              animate={{ rotateY: -3, rotateX: 0 }}
+              transition={{ duration: 4, repeat: Infinity, repeatType: "mirror" }}
+              className="relative w-full max-w-[420px] md:max-w-[520px]"
+            >
+              {/* Phone Frame Decoration */}
+              <div className="relative z-20 rounded-[3rem] p-3 border-[10px] border-slate-900 bg-slate-950 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] border-x-[14px] border-y-[14px] overflow-hidden">
+                {/* Speaker/Notch */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-5 bg-slate-900 rounded-b-xl z-30" />
+                
+                {/* Screen Content */}
+                <div className="relative aspect-[9/16] rounded-[2.2rem] bg-black overflow-hidden group">
+                  <AnimatePresence mode="wait">
+                    <motion.video
+                      key={current.videoUrl}
+                      ref={videoRef}
+                      src={current.videoUrl}
+                      autoPlay
+                      muted={isMuted}
+                      loop
+                      playsInline
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="w-full h-full object-cover"
+                    />
+                  </AnimatePresence>
 
-                {/* Audio Toggle Button */}
-                <button 
-                  onClick={(e) => { e.stopPropagation(); toggleMute(); }}
-                  className="absolute bottom-6 right-6 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/20 flex items-center gap-2 text-white hover:bg-white/30 transition-all z-30 shadow-lg"
-                  aria-label={isMuted ? "Unmute video" : "Mute video"}
-                >
-                  {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                  <span className="text-xs font-bold uppercase tracking-wider">{isMuted ? "Sound Off" : "Sound On"}</span>
-                </button>
-
-                {/* Play symbol for visual cue (Appears briefly if mutated) */}
-                <div className={`absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none transition-opacity duration-500 ${isMuted ? 'opacity-0 group-hover:opacity-100' : 'opacity-0'}`}>
-                   <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white scale-75 group-hover:scale-100 transition-all duration-500">
-                      <Play className="w-6 h-6 fill-white" />
-                   </div>
-                   <p className="text-white text-xs font-bold tracking-widest uppercase mt-4 drop-shadow-md">Tap to listen</p>
+                  {/* Volume Toggle */}
+                  <button 
+                    onClick={() => setIsMuted(!isMuted)}
+                    className="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white z-40 hover:bg-emerald-500 transition-all"
+                  >
+                    {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                  </button>
                 </div>
-              </div>
-            </div>
 
-            {/* Restored and Animated decorative background circle behind video */}
-            <motion.div 
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-emerald-100 to-transparent rounded-full opacity-60 -z-10" 
-            />
-            <motion.div 
-              animate={{ rotate: -360 }}
-              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-              className="absolute -bottom-10 -left-10 w-48 h-48 bg-gradient-to-tr from-blue-100 to-transparent rounded-full opacity-60 -z-10" 
-            />
-          </motion.div>
+                {/* Bottom Home Indicator */}
+                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-24 h-1.5 bg-white/20 rounded-full z-30" />
+              </div>
+
+              {/* Shadows & Glows */}
+              <div className="absolute inset-10 bg-emerald-500/15 blur-[80px] -z-10 rounded-full" />
+            </motion.div>
+          </div>
+
 
         </div>
       </div>

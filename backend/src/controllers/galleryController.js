@@ -14,7 +14,7 @@ exports.getGallery = async (req, res) => {
 
 exports.createGalleryItem = async (req, res) => {
   try {
-    const { title, imageUrl, category, date, location, impact, description, lat, lng } = req.body;
+    const { title, imageUrl, category, date, location, impact, description, lat, lng, mediaType } = req.body;
     const item = await prisma.galleryItem.create({
       data: { 
         title, 
@@ -24,6 +24,7 @@ exports.createGalleryItem = async (req, res) => {
         location, 
         impact, 
         description,
+        mediaType: mediaType || "image",
         lat: lat ? parseFloat(lat) : null,
         lng: lng ? parseFloat(lng) : null
       },

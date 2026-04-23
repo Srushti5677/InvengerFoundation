@@ -27,7 +27,7 @@ const AdminDashboard = () => {
   const [showProjectForm, setShowProjectForm] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [form, setForm] = useState({ title: "", description: "", goalAmount: "", imageUrl: "", videoUrl: "" });
-  const [galleryForm, setGalleryForm] = useState({ title: "", imageUrl: "", category: "events", impact: "", date: "", lat: 12.9716, lng: 77.5946 });
+  const [galleryForm, setGalleryForm] = useState({ title: "", imageUrl: "", category: "events", impact: "", description: "", date: "", lat: 12.9716, lng: 77.5946, mediaType: "image" });
   const [storyForm, setStoryForm] = useState({ title: "", subtitle: "", imageUrl: "", beforeText: "", afterText: "", quote: "", quotePerson: "", color: "#D4A017", isMilestone: false, year: new Date().getFullYear() });
   const [projectForm, setProjectForm] = useState({ title: "", summary: "", mainImage: "", impact: "", location: "", category: "", isFeatured: false, content: [] as any[] });
 
@@ -264,15 +264,23 @@ const AdminDashboard = () => {
                         <option value="plantations">Plantations</option>
                         <option value="drives">Drives</option>
                       </select>
+                      <select value={galleryForm.mediaType} onChange={e => setGalleryForm({...galleryForm, mediaType: e.target.value})} className="p-3 bg-slate-50 rounded-xl outline-none">
+                        <option value="image">Image</option>
+                        <option value="video">Video</option>
+                      </select>
                     </div>
                     <div className="grid grid-cols-2 gap-4 mb-4">
                       <input type="number" step="any" placeholder="Latitude (e.g. 12.97)" value={galleryForm.lat} onChange={e => setGalleryForm({...galleryForm, lat: parseFloat(e.target.value)})} className="p-3 bg-slate-50 rounded-xl outline-none" />
                       <input type="number" step="any" placeholder="Longitude (e.g. 77.59)" value={galleryForm.lng} onChange={e => setGalleryForm({...galleryForm, lng: parseFloat(e.target.value)})} className="p-3 bg-slate-50 rounded-xl outline-none" />
                     </div>
+                    <textarea placeholder="Work Description (Tell us what was done)" value={galleryForm.description} onChange={e => setGalleryForm({...galleryForm, description: e.target.value})} className="w-full p-3 bg-slate-50 rounded-xl outline-none h-24 mb-4 border border-slate-100" />
+                    <input type="text" placeholder="Impact Summary (e.g. 50+ lives touched)" value={galleryForm.impact} onChange={e => setGalleryForm({...galleryForm, impact: e.target.value})} className="w-full p-3 bg-slate-50 rounded-xl outline-none mb-4 border border-slate-100" />
                     <label className="w-full p-4 bg-emerald-50 border-2 border-dashed border-emerald-100 rounded-2xl flex flex-col items-center justify-center cursor-pointer mb-6">
-                      <ImagePlus className="w-8 h-8 text-emerald-400 mb-2" />
-                      <span className="text-xs font-bold text-emerald-600 uppercase">{galleryForm.imageUrl ? "PHOTO UPLOADED ✓" : "CLICK TO UPLOAD PHOTO"}</span>
-                      <input type="file" className="hidden" onChange={e => handleFileUpload(e, "imageUrl", "gallery")} />
+                      {galleryForm.mediaType === "image" ? <ImagePlus className="w-8 h-8 text-emerald-400 mb-2" /> : <Video className="w-8 h-8 text-emerald-400 mb-2" />}
+                      <span className="text-xs font-bold text-emerald-600 uppercase">
+                        {galleryForm.imageUrl ? `${galleryForm.mediaType.toUpperCase()} UPLOADED ✓` : `CLICK TO UPLOAD ${galleryForm.mediaType.toUpperCase()}`}
+                      </span>
+                      <input type="file" className="hidden" accept={galleryForm.mediaType === "video" ? "video/*" : "image/*"} onChange={e => handleFileUpload(e, "imageUrl", "gallery")} />
                     </label>
                     <div className="flex gap-2">
                       <button onClick={handleSaveGallery} className="px-6 py-2.5 bg-emerald-600 text-white rounded-xl text-xs font-bold">ADD TO GALLERY</button>

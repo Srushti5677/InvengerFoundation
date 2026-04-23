@@ -11,7 +11,7 @@ const socialLinks = [
 ];
 
 const Footer = () => (
-  <footer className="relative overflow-hidden" style={{ background: "linear-gradient(180deg, #0f2922 0%, #091a15 100%)" }}>
+  <footer id="contact" className="relative overflow-hidden" style={{ background: "linear-gradient(180deg, #0f2922 0%, #091a15 100%)" }}>
     {/* Decorative gradient line */}
     <div className="h-px w-full bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent" />
 
@@ -51,10 +51,10 @@ const Footer = () => (
           <h4 className="font-display font-bold text-white mb-5">Our Causes</h4>
           <div className="space-y-3">
             {[
-              { icon: PawPrint, label: "Animal Welfare", href: "#causes" },
-              { icon: Baby, label: "Orphan Support", href: "#causes" },
-              { icon: TreePine, label: "Environmental Protection", href: "#causes" },
-              { icon: Utensils, label: "Food & Aid", href: "#causes" },
+              { icon: PawPrint, label: "Animal Care", href: "#causes" },
+              { icon: TreePine, label: "Elder Care", href: "#causes" },
+              { icon: Baby, label: "Child Support", href: "#causes" },
+              { icon: Utensils, label: "Food Relief", href: "#causes" },
             ].map((item) => (
               <a
                 key={item.label}
@@ -87,15 +87,15 @@ const Footer = () => (
           <div className="space-y-4">
             <div className="flex items-start gap-3">
               <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-              <p className="text-white/40 text-sm">Bangalore, Karnataka, India</p>
+              <p className="text-white/40 text-sm">Invenger Tower's Ware House Road, Ballalbagh, Lalbagh, Mangaluru, Karnataka - 575 003</p>
             </div>
             <div className="flex items-center gap-3">
               <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
-              <p className="text-white/40 text-sm">+91 98765 43210</p>
+              <p className="text-white/40 text-sm">805-416-1971</p>
             </div>
             <div className="flex items-center gap-3">
               <Mail className="w-4 h-4 text-emerald-400 shrink-0" />
-              <p className="text-white/40 text-sm">info@invengerfoundation.org</p>
+              <p className="text-white/40 text-sm">info@invengerfoundation.com</p>
             </div>
           </div>
         </div>

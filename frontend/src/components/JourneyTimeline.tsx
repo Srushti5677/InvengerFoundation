@@ -2,6 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { Sparkles, Calendar, ArrowRight } from "lucide-react";
 
+import heroRescue from "@/assets/hero-rescue.png";
+import storySchool from "@/assets/story-school.png";
+import ambulanceImg from "@/assets/images/ambulance.jpg";
+import impactImg from "@/assets/images/20260227_124419.jpg";
+
 interface Milestone {
   id: number;
   title: string;
@@ -13,7 +18,44 @@ interface Milestone {
 }
 
 const JourneyTimeline = () => {
-  const [milestones, setMilestones] = useState<Milestone[]>([]);
+  const [milestones] = useState<Milestone[]>([
+    {
+      id: 1,
+      year: 2020,
+      title: "Foundation Inauguration",
+      subtitle: "A Vision Born in Bangalore",
+      imageUrl: storySchool,
+      afterText: "Our journey began with a simple mission: to bridge the gap between intent and action. We started our first community outreach programs with local schools.",
+      color: "#FBBF24"
+    },
+    {
+      id: 2,
+      year: 2021,
+      title: "Emergency Response Unit",
+      subtitle: "Rapid Action in Crisis",
+      imageUrl: ambulanceImg,
+      afterText: "Amidst global challenges, we launched our first dedicated ambulance service, providing 24/7 medical support to underserved regions.",
+      color: "#10B981"
+    },
+    {
+      id: 3,
+      year: 2022,
+      title: "Rescue Operations Expanded",
+      subtitle: "Saving Lives Every Day",
+      imageUrl: heroRescue,
+      afterText: "We established our animal rescue and treatment center, ensuring that no creature—from stray dogs to injured wildlife—is left behind.",
+      color: "#3B82F6"
+    },
+    {
+      id: 4,
+      year: 2023,
+      title: "Scaling New Heights",
+      subtitle: "15,000+ Lives Impacted",
+      imageUrl: impactImg,
+      afterText: "With your support, we reached a major milestone, providing food, healthcare, and education to over 15,000 individuals across the region.",
+      color: "#8B5CF6"
+    }
+  ]);
   const containerRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
@@ -27,27 +69,8 @@ const JourneyTimeline = () => {
     restDelta: 0.001
   });
 
-  useEffect(() => {
-    const fetchTimeline = async () => {
-      try {
-        const res = await fetch("http://localhost:5000/api/stories");
-        const data = await res.json();
-        // Filter for milestones and sort by year
-        const filtered = data
-          .filter((s: any) => s.isMilestone)
-          .sort((a: any, b: any) => a.year - b.year);
-        setMilestones(filtered);
-      } catch (err) {
-        console.error("Timeline load fail", err);
-      }
-    };
-    fetchTimeline();
-  }, []);
-
-  if (milestones.length === 0) return null;
-
   return (
-    <section ref={containerRef} className="py-24 bg-white relative overflow-hidden">
+    <section id="about" ref={containerRef} className="py-24 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}

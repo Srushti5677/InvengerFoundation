@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { ArrowDown, Users, TreePine, Utensils, PawPrint } from "lucide-react";
 import heroRescue from "@/assets/hero-rescue.png";
-import heroChildren from "@/assets/hero-children.png";
+import heroChildren from "@/assets/images/image11.jpg";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const slides = [

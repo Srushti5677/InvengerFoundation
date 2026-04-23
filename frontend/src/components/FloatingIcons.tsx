@@ -2,11 +2,9 @@ import { motion } from "framer-motion";
 
 const icons = [
   { emoji: "🍃", size: 18, x: "8%", delay: 0, duration: 14 },
-  { emoji: "❤️", size: 14, x: "22%", delay: 2, duration: 18 },
   { emoji: "🐾", size: 16, x: "35%", delay: 4, duration: 16 },
   { emoji: "🌱", size: 15, x: "50%", delay: 1, duration: 20 },
   { emoji: "🍃", size: 20, x: "65%", delay: 3, duration: 15 },
-  { emoji: "❤️", size: 12, x: "78%", delay: 5, duration: 17 },
   { emoji: "🐾", size: 14, x: "90%", delay: 0.5, duration: 19 },
   { emoji: "🌱", size: 16, x: "15%", delay: 6, duration: 22 },
 ];
