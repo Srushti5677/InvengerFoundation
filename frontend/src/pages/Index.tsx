@@ -5,10 +5,10 @@ import VideoImpactSection from "@/components/VideoImpactSection";
 import JourneyTimeline from "@/components/JourneyTimeline";
 import CausesSection from "@/components/CausesSection";
 import OurWorkShowcase from "@/components/OurWorkShowcase";
-import ActionCenter from "@/components/ActionCenter";
+// import ActionCenter from "@/components/ActionCenter";
 import Footer from "@/components/Footer";
 import LoadingScreen from "@/components/LoadingScreen";
-import FloatingActionButton from "@/components/FloatingActionButton";
+// import FloatingActionButton from "@/components/FloatingActionButton";
 import FloatingIcons from "@/components/FloatingIcons";
 import DarkModeToggle from "@/components/DarkModeToggle";
 
@@ -36,10 +36,10 @@ const Index = () => {
         <CausesSection />
         <SectionDivider variant="wave" color="#05070A" />
         <OurWorkShowcase />
-        <ActionCenter />
+        {/* <ActionCenter /> */}
       </main>
       <Footer />
-      <FloatingActionButton />
+      {/* <FloatingActionButton /> */}
       <FloatingIcons />
       <DarkModeToggle />
     </div>

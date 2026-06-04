@@ -140,9 +140,9 @@ const JourneyTimeline = () => {
                      <p className="text-slate-500 leading-relaxed font-medium text-lg">
                        {m.afterText}
                      </p>
-                     <button className="mt-8 inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-900 hover:text-emerald-600 transition-colors">
+                     {/* <button className="mt-8 inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-900 hover:text-emerald-600 transition-colors">
                         Explored Full Record <ArrowRight className="w-4 h-4" />
-                     </button>
+                     </button> */}
                    </motion.div>
                 </div>
               </div>

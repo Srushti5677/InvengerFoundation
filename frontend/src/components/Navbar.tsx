@@ -9,8 +9,8 @@ const navLinks = [
   { label: "Our Causes", href: "#causes" },
   { label: "Impact", href: "#impact" },
   { label: "Gallery", href: "#gallery" },
-  { label: "Volunteer", href: "#volunteer" },
-  { label: "Blog", href: "#blog" },
+  // { label: "Volunteer", href: "#volunteer" },
+  // { label: "Blog", href: "#blog" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -91,7 +91,7 @@ const Navbar = () => {
               </a>
             );
           })}
-          <motion.a
+          {/* <motion.a
             href="#donate"
             className="ml-3 px-6 py-2.5 text-sm font-semibold rounded-full relative overflow-hidden inline-flex items-center gap-2"
             style={{
@@ -101,7 +101,7 @@ const Navbar = () => {
             whileTap={{ scale: 0.97 }}
           >
             <span className="relative z-10 text-white">Donate Now</span>
-          </motion.a>
+          </motion.a> */}
         </div>
 
         <button
@@ -136,14 +136,14 @@ const Navbar = () => {
                   {l.label}
                 </a>
               ))}
-              <a
+              {/* <a
                 href="#donate"
                 onClick={() => setMobileOpen(false)}
                 className="mt-2 px-6 py-3 text-sm font-semibold text-center rounded-xl text-white flex items-center justify-center gap-2"
                 style={{ background: "linear-gradient(135deg, #E8553A, #D4432E)" }}
               >
                 Donate Now
-              </a>
+              </a> */}
             </div>
           </motion.div>
         )}

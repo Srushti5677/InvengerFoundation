@@ -14,8 +14,8 @@ const createVolunteer = async (req, res) => {
     });
 
     // Trigger emails in background (don't await to keep response fast)
-    sendVolunteerNotification(volunteer);
-    sendVolunteerThankYou(volunteer);
+    // sendVolunteerNotification(volunteer);
+    // sendVolunteerThankYou(volunteer);
 
     res.status(201).json({ message: 'Success! You have joined as a volunteer.', volunteer });
   } catch (err) {
