@@ -18,7 +18,7 @@ const values = [
 
 const AboutSection = () => {
   return (
-    <section id="about" className="py-12 relative overflow-hidden">
+    <section id="about" className="py-20 lg:py-24 scroll-mt-20 relative overflow-hidden">
       {/* Warm background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-emerald-50/30" />
       <div className="absolute -right-40 top-20 w-[500px] h-[500px] rounded-full bg-emerald-400/5 blur-[100px]" />

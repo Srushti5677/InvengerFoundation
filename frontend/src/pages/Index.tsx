@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import VideoImpactSection from "@/components/VideoImpactSection";
-import JourneyTimeline from "@/components/JourneyTimeline";
+import AboutSection from "@/components/AboutSection";
+import AnniversarySection from "@/components/AnniversarySection";
+// import JourneyTimeline from "@/components/JourneyTimeline";
 import CausesSection from "@/components/CausesSection";
 import OurWorkShowcase from "@/components/OurWorkShowcase";
 // import ActionCenter from "@/components/ActionCenter";
@@ -32,10 +34,15 @@ const Index = () => {
         <HeroSection />
         <VideoImpactSection />
         <SectionDivider variant="tilt" color="white" className="z-20" />
-        <JourneyTimeline />
+        <AboutSection />
+        {/* <JourneyTimeline /> */}
+        <SectionDivider variant="tilt" color="#051411" className="bg-white" />
+        <AnniversarySection />
+        <SectionDivider variant="tilt" color="white" className="bg-[#051411]" />
         <CausesSection />
         <SectionDivider variant="wave" color="#05070A" />
         <OurWorkShowcase />
+        <SectionDivider variant="tilt" color="#0f2922" className="bg-[#05070A]" />
         {/* <ActionCenter /> */}
       </main>
       <Footer />

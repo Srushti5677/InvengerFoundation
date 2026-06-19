@@ -37,43 +37,43 @@ const causes = [
 ];
 
 const CausesSection = () => (
-  <section id="causes" className="py-16 relative overflow-hidden">
-    <div className="absolute inset-0 bg-gradient-to-b from-emerald-50/30 via-background to-background" />
+  <section id="causes" className="py-16 lg:py-0 lg:h-screen lg:min-h-[650px] scroll-mt-20 relative overflow-hidden flex items-center bg-white">
+    <div className="absolute inset-0 bg-gradient-to-b from-emerald-50/20 via-background to-background" />
     <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-blue-400/5 blur-[100px]" />
 
-    <div className="relative container mx-auto px-4">
+    <div className="relative container mx-auto px-4 w-full lg:pt-20 lg:pb-12">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-10"
+        className="text-center mb-6 lg:mb-8"
       >
         <span className="section-badge">What We Do</span>
-        <h2 className="section-title mt-5">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 mt-4 tracking-tight">
           Every Life{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-blue-500">
             Deserves
           </span>{" "}
           a Champion
         </h2>
-        <p className="section-subtitle mt-5">
+        <p className="text-slate-500 mt-3 text-sm md:text-base max-w-xl mx-auto">
           Our work spans across four pillars of compassion. Each cause is close to our hearts
           and fueled by the belief that change starts with caring.
         </p>
       </motion.div>
 
-      <div className="grid md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4 xl:gap-6">
         {causes.map((cause, i) => (
           <motion.div
             key={cause.title}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.12, duration: 0.6 }}
-            className="cause-card rounded-2xl overflow-hidden group cursor-pointer"
+            transition={{ delay: i * 0.08, duration: 0.5 }}
+            className="cause-card rounded-2xl overflow-hidden group cursor-pointer bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300"
           >
             {/* Image */}
-            <div className="relative h-56 overflow-hidden">
+            <div className="relative h-48 sm:h-52 md:h-48 lg:h-36 xl:h-40 overflow-hidden">
               <img
                 src={cause.image}
                 alt={cause.title}
@@ -83,21 +83,20 @@ const CausesSection = () => (
                 height={600}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-              <div className="absolute bottom-4 left-5 flex items-center gap-2">
+              <div className="absolute bottom-3 left-4 flex items-center gap-2">
                 <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center"
-                  style={{ backgroundColor: cause.color, boxShadow: `0 4px 15px ${cause.color}50` }}
+                  className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+                  style={{ backgroundColor: cause.color, boxShadow: `0 4px 10px ${cause.color}40` }}
                 >
-                  <cause.icon className="w-5 h-5 text-white" />
+                  <cause.icon className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-white font-semibold text-lg">{cause.title}</span>
+                <span className="text-white font-bold text-base">{cause.title}</span>
               </div>
-
             </div>
 
             {/* Content */}
-            <div className="p-6">
-              <p className="text-muted-foreground leading-relaxed">{cause.description}</p>
+            <div className="p-4 lg:p-3.5 xl:p-4">
+              <p className="text-slate-500 text-sm leading-relaxed font-medium">{cause.description}</p>
             </div>
           </motion.div>
         ))}
